@@ -1,0 +1,110 @@
+{
+  "description": "Expected data structure when processing invoice PDFs",
+  "sample_invoices": [
+    {
+      "invoice_number": "INV-2024-0342",
+      "vendor_name": "Acme Corp",
+      "invoice_date": "2024-01-15",
+      "due_date": "2024-02-14",
+      "subtotal": 1150.0,
+      "tax": 92.0,
+      "total_amount": 1242.0,
+      "line_items": [
+        {
+          "description": "Steel rods - Grade 304",
+          "quantity": 50,
+          "unit_price": 18.0,
+          "total": 900.0
+        },
+        {
+          "description": "Shipping & Handling",
+          "quantity": 1,
+          "unit_price": 250.0,
+          "total": 250.0
+        }
+      ],
+      "notes": "Payment terms: Net 30",
+      "confidence_score": 0.98
+    },
+    {
+      "invoice_number": "WS-789456",
+      "vendor_name": "Widget Supplies Inc",
+      "invoice_date": "2024-01-18",
+      "due_date": "2024-02-17",
+      "subtotal": 3240.5,
+      "tax": 259.24,
+      "total_amount": 3499.74,
+      "line_items": [
+        {
+          "description": "Precision bearings (SKU: BR-2040)",
+          "quantity": 100,
+          "unit_price": 12.5,
+          "total": 1250.0
+        },
+        {
+          "description": "Industrial fasteners - Set A",
+          "quantity": 25,
+          "unit_price": 79.62,
+          "total": 1990.5
+        }
+      ],
+      "notes": "Bulk discount applied - 10%",
+      "confidence_score": 0.95
+    },
+    {
+      "invoice_number": "TP-2024-0891",
+      "vendor_name": "Tech Parts Direct",
+      "invoice_date": "2024-01-20",
+      "due_date": "2024-02-04",
+      "subtotal": 875.0,
+      "tax": 70.0,
+      "total_amount": 945.0,
+      "line_items": [
+        {
+          "description": "Circuit boards - Custom order #45",
+          "quantity": 15,
+          "unit_price": 58.33,
+          "total": 875.0
+        }
+      ],
+      "notes": "Express shipping - Due date is strict",
+      "confidence_score": 0.92
+    }
+  ],
+  "field_requirements": {
+    "required": [
+      "invoice_number",
+      "vendor_name",
+      "invoice_date",
+      "due_date",
+      "total_amount"
+    ],
+    "optional": ["subtotal", "tax", "line_items", "notes", "confidence_score"]
+  },
+  "validation_rules": {
+    "invoice_number": "Must be non-empty string",
+    "vendor_name": "Must be non-empty string",
+    "invoice_date": "Must be valid date (YYYY-MM-DD)",
+    "due_date": "Must be valid date (YYYY-MM-DD), should be >= invoice_date",
+    "total_amount": "Must be positive number",
+    "subtotal": "Should be <= total_amount",
+    "tax": "Should be >= 0",
+    "confidence_score": "Float between 0 and 1. Flag for review if < 0.90"
+  },
+  "error_handling": {
+    "low_confidence": "If confidence_score < 0.90, flag for manual review",
+    "missing_required_field": "Cannot process, flag for manual entry",
+    "invalid_date": "Flag for manual review",
+    "amount_mismatch": "If subtotal + tax != total (within $0.10), flag for review"
+  },
+  "airtable_mapping": {
+    "Invoice Number": "invoice_number",
+    "Vendor": "vendor_name (lookup in Vendors table)",
+    "Invoice Date": "invoice_date",
+    "Due Date": "due_date",
+    "Amount": "total_amount",
+    "Status": "Received (default)",
+    "Notes": "notes + confidence_score info",
+    "PDF File": "original PDF attachment"
+  }
+}

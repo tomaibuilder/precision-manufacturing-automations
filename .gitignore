@@ -1,0 +1,34 @@
+# Environment variables (API keys, secrets)
+.env
+*.env
+credentials.json
+token.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Processed invoices (generated at runtime)
+processed/
+
+# Vercel
+.vercel/
+
+# Temporary files
+temp_downloads/
