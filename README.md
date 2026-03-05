@@ -198,11 +198,37 @@ precision-manufacturing-automations/
 │       ├── app.py                     # Flask backend
 │       └── index.html                 # Upload interface
 ├── sample-data/                       # 5 test invoice PDFs
+├── documentation/                     # Complete documentation library
+│   ├── DOCUMENTATION.md              # Documentation guide (start here)
+│   ├── Handoff_Document.md           # New maintainer onboarding
+│   ├── runbooks/                     # Operational guides
+│   │   ├── Invoice_Processor_Runbook.md
+│   │   ├── Drive_Automation_Runbook.md
+│   │   ├── Web_App_Runbook.md
+│   │   └── HR_Onboarding_Runbook.md
+│   ├── quick-starts/                 # End-user guides
+│   │   ├── Invoice_Web_App_Quick_Start.md
+│   │   └── HR_Dashboard_Quick_Start.md
+│   └── training/                     # Reference materials
+│       ├── FAQ.md
+│       └── Maintenance_Guide.md
 ├── .env.example                       # Environment variable template
 ├── requirements.txt                   # Python dependencies
 ├── CLAUDE.md                          # Automation playbook
 └── README.md                          # This file
 ```
+
+## Documentation
+
+Complete documentation is available in the `documentation/` folder. See the [Documentation Guide](documentation/DOCUMENTATION.md) for where to start based on your role.
+
+| You are a... | Start with... |
+|---|---|
+| Finance team member | [Invoice Web App Quick Start](documentation/quick-starts/Invoice_Web_App_Quick_Start.md) |
+| HR team member | [HR Dashboard Quick Start](documentation/quick-starts/HR_Dashboard_Quick_Start.md) |
+| System operator | [Runbooks](documentation/runbooks/) |
+| New maintainer | [Handoff Document](documentation/Handoff_Document.md) |
+| Developer | [CLAUDE.md](CLAUDE.md) |
 
 ---
 
